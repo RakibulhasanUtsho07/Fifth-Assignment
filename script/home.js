@@ -31,7 +31,7 @@ function displayCard(cards){
         <div class="space-y-4 mb-5">
               <div class="flex justify-between">
                 <img src="./assets/Open-Status.png" alt="" class="w-7 h-7" />
-                <p class="text-[#EF4444] bg-[#EF444420] px-6 py-1 rounded-xl">
+                <p class="text-[#EF4444] bg-[#EF444420] px-6 py-1 rounded-xl cursor-pointer">
                   ${word.priority}
                 </p>
               </div>
