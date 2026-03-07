@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--add tailwind css and daisyui cdn link-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!--add google geist font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- add font awesome cdn link-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--link css file-->
+    <link rel="stylesheet" href="./style/styles.css" />
+    <title>GitHub Issues Tracker || Home Page</title>
+  </head>
+  <body class="bg-[#F8FAFC]">
+    <header>
+      <nav class="bg-base-100 shadow-sm py-5">
+        <div class="flex justify-between mx-3">
+          <div class="flex">
+            <img
+              src="./assets/github-logo.png"
+              alt=""
+              class="w-[36px] h-[36px]"
+            />
+
+            <p class="btn btn-ghost text-xl">GitHub Issues Tracker</p>
+          </div>
+          <div class="flex gap-3 ">
+            <input
+              type="text"
+              placeholder="Search"
+              class="input input-bordered w-24 md:w-auto "
+            />
+            <button class="btn btn-primary">Primary</button>
+          </div>
+
+          <!--
+          <div class="flex gap-2">
+            <div class="dropdown dropdown-end">
+              <div
+                tabindex="0"
+                role="button"
+                class="btn btn-ghost btn-circle avatar"
+              >
+                <div class= "></div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div>
+      </nav>
+    </header>
+    <main class="w-11/12 mx-auto mt-15" >
+        <section id="tab-btn-container" class=" flex gap-3  bg-white p-5">
+            <button class="btn btn-primary">All</button>
+            <button class="btn btn-neutral btn-outline">Open</button>
+            <button class="btn btn-neutral btn-outline">Closed</button>
+        </section>
+        <section>
+            <div>
+                <img src="./assets/" alt="">
+            </div>
+        </section>
+
+    </main>
+  </body>
+</html>
