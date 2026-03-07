@@ -74,7 +74,7 @@
         id="tab-btn-container"
         class="flex gap-3 bg-white p-5 mb-10 rounded"
       >
-        <button class="btn btn-primary">All</button>
+        <button id="all-tab-btn"  class="btn btn-primary">All</button>
         <button class="btn btn-neutral btn-outline">Open</button>
         <button class="btn btn-neutral btn-outline">Closed</button>
       </section>
@@ -100,41 +100,8 @@
         </ul>
       </section>
       <section class="bg-[#FBFBFB]">
-        <div id="issues-card-container" class="grid grid-cols-3 gap-4 p-6">
-          <div class="bg-white p-4 rounded">
-            <div class="space-y-4 mb-5">
-              <div class="flex justify-between">
-                <img src="./assets/Open-Status.png" alt="" class="w-7 h-7" />
-                <p class="text-[#EF4444] bg-[#EF444420] px-6 py-1 rounded-xl">
-                  High
-                </p>
-              </div>
-              <h3 class="text-[18px] font-semibold ">
-                Fix navigation menu on mobile devices
-              </h3>
-              <p class="line-clamp-2 text-[16px] text-[#64748B]">
-                The navigation menu doesn't collapse properly on mobile
-                devices...
-              </p>
-              <div class="flex gap-3">
-                <p
-                  class="text-[#EF4444] bg-[#EF444420] px-4 py-1 rounded-2xl border border-[#EF4444]"
-                >
-                  Bug
-                </p>
-                <p
-                  class="text-[#D97706] bg-[#D9770620] px-7 py-1 rounded-2xl border border-[#D97706]"
-                >
-                  help wanted
-                </p>
-              </div>
-            </div>
-            <hr class="text-gray-300" />
-            <div class="p-3">
-              <p class="text-[16px] text-[#64748B]">#1 by john_doe</p>
-              <p class="text-[16px] text-[#64748B]">1/15/2024</p>
-            </div>
-          </div>
+        <div id="issues-cards-container" class="grid grid-cols-3 gap-4 p-6">
+          
         </div>
       </section>
     </main>
