@@ -7,7 +7,7 @@ const userPassword = document.getElementById("user-password");
 
 singInBtn.addEventListener("click", function(){
     if(userName.value === "admin" && userPassword.value === "admin123"){
-        window.location.assign("/home.html");
+        window.location.assign("./home.html");
         
     }
     else{

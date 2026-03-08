@@ -31,7 +31,7 @@
 //     "updatedAt": "2024-02-02T10:00:00Z"
 //   }
 // }
-
+const batchContainer = document.getElementById("batch-container");
 const allTabBtn = document.getElementById("all-tab-btn");
 const cardOneModal = document.getElementById("card-one-modal");
 const titleDetails = document.getElementById("tittle-details")
@@ -67,8 +67,21 @@ async function displayModal(id){
    descriptionDetails.textContent = cardDetails.description;
    secondTimeName.textContent = cardDetails.author;
    priorityDetails.textContent = cardDetails.priority;
-   labelsDetailsFirst.textContent = cardDetails.labels[0];
-   labelsDetailsSecond.textContent = `${cardDetails.labels[1] === "undefined" ?  "" : cardDetails.labels[1] }`;
+  //  labelsDetailsFirst.textContent = cardDetails.labels[0];
+  //  labelsDetailsSecond.textContent = `${cardDetails.labels[1] === "undefined" ?  "" : cardDetails.labels[1] }`;
+
+  for(const label of cardDetails.labels){
+    
+    const batch = document.createElement("p");
+   
+    batch.innerHTML = `<p id="labels-details-second"
+                class="text-[#D97706] bg-[#D9770620] px-7 py-1 rounded-2xl border border-[#D97706]"
+              >
+                ${label}
+              </p>`
+    batchContainer.append(batch);
+     batch.innerHTML = ""
+  }
   
 
   cardOneModal.showModal();
