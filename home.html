@@ -32,7 +32,7 @@
   <body class="bg-[#F8FAFC]">
     <header>
       <nav class="bg-base-100 shadow-sm py-5">
-        <div class="flex justify-between mx-3">
+        <div class="flex flex-col md:flex-row justify-between mx-3">
           <div class="flex">
             <img
               src="./assets/github-logo.png"
@@ -44,13 +44,13 @@
           </div>
           <div class="flex gap-3">
             <input 
-              id="scearch"
+              id="search-input"
               type="text"
               placeholder="Search Issues"
               class="input input-bordered w-24 md:w-auto"
             />
-            <button class="btn btn-primary">
-              <i class="fa-solid fa-plus"></i> New Issues
+            <button id="search-btn" class="btn btn-primary">
+               Search
             </button>
           </div>
 
@@ -70,7 +70,7 @@
         </div>
       </nav>
     </header>
-    <main class="w-11/12 mx-auto mt-15">
+    <main class="w-full md:w-11/12 mx-auto mt-15">
       <section
         id="tab-btn-container"
         class="flex gap-3 bg-white p-5 mb-10 rounded"
@@ -103,7 +103,7 @@
       <section class="bg-[#FBFBFB]">
         <div
           id="issues-cards-container"
-          class="grid grid-cols-3 gap-4 p-6"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6"
         ></div>
       </section>
       <section>
@@ -119,20 +119,11 @@
                 <li id="">22/02/2026</li>
               </ul>
             </div>
-            <div id="batch-container" class="flex gap-3">
-              <!--
-              <p id="labels-details-first"
-                class="text-[#EF4444] bg-[#EF444420] px-4 py-1 rounded-2xl border border-[#EF4444]"
-              >
-                hello
-              </p>
-              <p id="labels-details-second"
-                class="text-[#D97706] bg-[#D9770620] px-7 py-1 rounded-2xl border border-[#D97706]"
-              >
-                hi
-              </p>-->
-            </div>
             <p id="description-details" class="line-clamp-2 text-[16px] text-[#64748B] mt-4 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, maxime.</p>
+            <div id="batch-container" class="flex gap-3 flex-wrap mb-5">
+              
+            </div>
+            
             <div class="bg-gray-200 rounded p-5">
               <div class="grid grid-cols-2 mx-5">
                 <p class="line-clamp-2 text-[16px] text-[#64748B]">Assignee:</p>
@@ -153,6 +144,8 @@
           </div>
         </dialog>
       </section>
+     
+       
     </main>
     <script src="./script/home.js"></script>
   </body>
