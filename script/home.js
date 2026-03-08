@@ -18,15 +18,36 @@ const issuesCardsContainer = document.getElementById("issues-cards-container");
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 issuesCardsContainer.innerHTML = "";
+
 const authorDetails = document.getElementById("author-name");
 const secondTimeName = document.getElementById("second-time-name");
+const spinner = document.getElementById("spinner");
+function loadSpinner(status){
+  if(status === true){
+    spinner.classList.remove("hidden")
+  }
+}
+function removeSpinner(status){
+  if(status === true){
+    spinner.classList.add("hidden")
+  }
+}
 function issuesCount (){
   dynamicallyIssuesCount.textContent= issuesCardsContainer.children.length ;
 }
 function cardLoad (card){
+  let borderColor = "";
+      if(card.status.toLowerCase() === "open"){
+      borderColor = "border-t-2 border-b-2 border-green-400"
+    }
+    else if(card.status.toLowerCase() === "closed"){
+      borderColor = "border-t-2 border-b-2 border-purple-500"
+    }
+
   
     const labelsHTML = card.labels.map(label => {
       let classColor = "";
+      
       if(label.toLowerCase() === "bug"){
         classColor = "text-[#EF4444] bg-[#EF444420] border-[#EF4444]"
       }
@@ -46,10 +67,12 @@ function cardLoad (card){
     }).join("");
     
     
+    
+    
   
   
   const createDiv = document.createElement("div");
-      createDiv.className = "bg-white p-4 rounded issue-card";
+      createDiv.className = `bg-white p-4 rounded-xl issue-card ${borderColor} ` ;
       createDiv.innerHTML = `
         <div  onclick="displayModal(${card.id})" class="space-y-4 mb-5 cursor-pointer">
               <div class="flex justify-between">
@@ -82,17 +105,20 @@ function cardLoad (card){
 const descriptionDetails = document.getElementById("description-details");
 function allCardLoad() {
   btnHandleAll ()
+  loadSpinner(true)
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues `;
   fetch(url)
     .then((res) => res.json())
     .then((json) => displayCard(json.data));
 }
 async function displayModal(id) {
+  loadSpinner(true)
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
   );
   const data = await res.json();
   const cardDetails = data.data;
+  
 
   titleDetails.textContent = cardDetails.title;
   statusDetails.textContent = cardDetails.status;
@@ -128,12 +154,13 @@ function displayCard(cards) {
   cards.forEach((card) => {
     cardLoad (card)
     
+    
   });
   issuesCount()
 }
 allCardLoad();
 function btnHandleAll (){
-  allTabBtn.classList.add("btn-primary","bg-blue")
+  allTabBtn.classList.add("btn-primary")
   allTabBtn.classList.remove("btn-outline")
   openTabBtn.classList.remove("btn-primary")
   openTabBtn.classList.add("btn-outline")
@@ -141,7 +168,7 @@ function btnHandleAll (){
   closedTabBtn.classList.add("btn-outline")
 }
 function btnHandleOpen (){
-  openTabBtn.classList.add("btn-primary","bg-blue")
+  openTabBtn.classList.add("btn-primary")
   openTabBtn.classList.remove("btn-outline")
   allTabBtn.classList.remove("btn-primary")
   allTabBtn.classList.add("btn-outline")
@@ -149,7 +176,7 @@ function btnHandleOpen (){
   closedTabBtn.classList.add("btn-outline")
 }
 function btnHandleClosed (){
-  closedTabBtn.classList.add("btn-primary","bg-blue")
+  closedTabBtn.classList.add("btn-primary")
   closedTabBtn.classList.remove("btn-outline")
   allTabBtn.classList.remove("btn-primary")
   allTabBtn.classList.add("btn-outline")
@@ -159,6 +186,7 @@ function btnHandleClosed (){
 
 async function displayAllCard(id) {
   btnHandleAll();
+  loadSpinner(true)
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -173,10 +201,12 @@ async function displayAllCard(id) {
     }
   });
   issuesCount()
+  removeSpinner(true)
 }
 
-async function displayOpenedCard(id) {
+async function displayOpenedCard() {
   btnHandleOpen()
+  loadSpinner(true)
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -193,9 +223,11 @@ async function displayOpenedCard(id) {
     
   });
   issuesCount()
+  removeSpinner(true)
 }
-async function displayClosedCard(id) {
+async function displayClosedCard() {
   btnHandleClosed();
+  loadSpinner(true)
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -210,6 +242,8 @@ async function displayClosedCard(id) {
     }
   });
   issuesCount()
+  removeSpinner(true)
+
 }
 
 searchBtn.addEventListener("click", function(){
@@ -226,6 +260,7 @@ searchBtn.addEventListener("click", function(){
   
 })
 async function searchCard(searchValue) {
+  loadSpinner(true)
   issuesCardsContainer.innerHTML = "";
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`
     const res = await fetch(url)
@@ -236,7 +271,7 @@ async function searchCard(searchValue) {
       cardLoad(card)
     })
     
-
+    removeSpinner(true)
   }
   
 
