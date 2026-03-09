@@ -146,19 +146,29 @@ async function displayModal(id) {
 
   batchContainer.innerHTML = "";
   for (const label of cardDetails.labels) {
+    const batchDiv = document.createElement("div")
+    batchDiv.innerHTML =""
+    
     const batch = document.createElement("p");
+    batchDiv.className = "flex gap-1 px-5 py-1 rounded-2xl border whitespace-nowrap"
+    const batchImg = document.createElement("img")
+    batchImg.className = "w-3 h-3 my-auto"
+
     if(label.toLowerCase() === "bug"){
-        batch.className = "text-[#EF4444] bg-[#EF444420] border-[#EF4444] px-7 py-1 rounded-2xl border whitespace-nowrap"
+        batchDiv.classList.add ("text-[#EF4444]", "bg-[#EF444420]", "border-[#EF4444]" )
+        batchImg.src = "./assets/Vector (4).png"
       }
       else if(label.toLowerCase() ==="help wanted"){
-        batch.className = "text-[#D97706] bg-[#D9770620] border-[#D97706] px-7 py-1 rounded-2xl border whitespace-nowrap"
+        batchDiv.classList.add ("text-[#D97706]", "bg-[#D9770620]", "border-[#D97706]" )
+        batchImg.src = "./assets/Vector (5).png"
       }
       else{
-        batch.className ="text-[#00A96E] bg-[#00A96E20] border-[#00A96E] px-7 py-1 rounded-2xl border whitespace-nowrap"
+        batchDiv.classList.add("text-[#00A96E]", "bg-[#00A96E20]", "border-[#00A96E]") 
+        batchImg.src = "./assets/Vector (3).png"
       }
-    batch.textContent = label;
-
-    batchContainer.append(batch);
+    batch.textContent = label.toUpperCase();
+    batchDiv.append(batchImg , batch)
+    batchContainer.append(batchDiv);
   }
 
   cardOneModal.showModal();
