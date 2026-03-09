@@ -1,5 +1,6 @@
 
 const cardBatch = document.getElementById("card-batch")
+
 const batchContainer = document.getElementById("batch-container");
 const allTabBtn = document.getElementById("all-tab-btn");
 const openTabBtn = document.getElementById("open-tab-btn");
@@ -8,6 +9,7 @@ const  dynamicallyIssuesCount =document.getElementById("dynamically-issues-count
 const cardOneModal = document.getElementById("card-one-modal");
 const titleDetails = document.getElementById("tittle-details");
 const statusDetails = document.getElementById("status-details");
+const secondStatusDetails = document.getElementById("second-status-details")
 const assigneeDetails = document.getElementById("assignee-details");
 const createdAtDetails = document.getElementById("createdAt-details");
 const updatedAtDetails = document.getElementById("updatedAt-details");
@@ -17,6 +19,7 @@ const labelsDetailsSecond = document.getElementById("labels-details-second");
 const issuesCardsContainer = document.getElementById("issues-cards-container");
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
+const openDate = document.getElementById("open-date");
 issuesCardsContainer.innerHTML = "";
 
 const authorDetails = document.getElementById("author-name");
@@ -39,6 +42,7 @@ function cardLoad (card){
   let borderColor = "";
       if(card.status.toLowerCase() === "open"){
       borderColor = "border-t-2 border-b-2 border-green-400"
+      
     }
     else if(card.status.toLowerCase() === "closed"){
       borderColor = "border-t-2 border-b-2 border-purple-500"
@@ -47,21 +51,28 @@ function cardLoad (card){
   
     const labelsHTML = card.labels.map(label => {
       let classColor = "";
+      let imageSrc = ""
       
       if(label.toLowerCase() === "bug"){
         classColor = "text-[#EF4444] bg-[#EF444420] border-[#EF4444]"
+        imageSrc = "Vector (4).png"
       }
       else if(label.toLowerCase() ==="help wanted"){
         classColor = "text-[#D97706] bg-[#D9770620] border-[#D97706]"
+        imageSrc = "Vector (5).png"
       }
       else{
         classColor ="text-[#00A96E] bg-[#00A96E20] border-[#00A96E]"
+        imageSrc = "Vector (3).png"
       }
       
      return `
-        <p class="${classColor} px-7 py-1 rounded-2xl border whitespace-nowrap">
+        <div class="${classColor}  flex gap-1 px-2 py-1 rounded-2xl border whitespace-nowrap">
+        <img src="./assets/${imageSrc}" alt="" class="w-3 h-3 my-auto">
+        <p class="">
             ${label.toUpperCase()}
         </p>
+        </div>
     `;
     
     }).join("");
@@ -72,6 +83,7 @@ function cardLoad (card){
   
   
   const createDiv = document.createElement("div");
+  loadSpinner(true)
       createDiv.className = `bg-white p-4 rounded-xl issue-card ${borderColor} ` ;
       createDiv.innerHTML = `
         <div  onclick="displayModal(${card.id})" class="space-y-4 mb-5 cursor-pointer">
@@ -90,29 +102,31 @@ function cardLoad (card){
               <div id="card-batch" class="flex gap-3 flex-wrap">
                 ${labelsHTML}
               </div>
+               <hr class="text-gray-300" />
+            <div class="flex flex-col justify-center">
+              <p class="text-[16px] text-[#64748B]">#1 by  ${card.author}</p>
+              <p class="text-[16px] text-[#64748B]">${card.updatedAt.split('T')[0]}</p>
             </div>
-            <hr class="text-gray-300" />
-            <div class="p-3">
-              <p class="text-[16px] text-[#64748B]">#1 ${card.createdAt}</p>
-              <p class="text-[16px] text-[#64748B]">${card.updatedAt}</p>
             </div>
-        </div>
+           
+        
         `;
       issuesCardsContainer.append(createDiv);
+      removeSpinner(true)
 }
 
 
 const descriptionDetails = document.getElementById("description-details");
 function allCardLoad() {
   btnHandleAll ()
-  loadSpinner(true)
+  
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues `;
   fetch(url)
     .then((res) => res.json())
     .then((json) => displayCard(json.data));
 }
 async function displayModal(id) {
-  loadSpinner(true)
+  
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
   );
@@ -121,6 +135,8 @@ async function displayModal(id) {
   
 
   titleDetails.textContent = cardDetails.title;
+  secondStatusDetails.textContent = cardDetails.status
+  openDate.textContent = cardDetails.updatedAt.split('T')[0];
   statusDetails.textContent = cardDetails.status;
   authorDetails.textContent = cardDetails.author;
   descriptionDetails.textContent = cardDetails.description;
@@ -186,7 +202,7 @@ function btnHandleClosed (){
 
 async function displayAllCard(id) {
   btnHandleAll();
-  loadSpinner(true)
+  
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -201,12 +217,12 @@ async function displayAllCard(id) {
     }
   });
   issuesCount()
-  removeSpinner(true)
+  
 }
 
 async function displayOpenedCard() {
   btnHandleOpen()
-  loadSpinner(true)
+  
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -223,11 +239,11 @@ async function displayOpenedCard() {
     
   });
   issuesCount()
-  removeSpinner(true)
+  
 }
 async function displayClosedCard() {
   btnHandleClosed();
-  loadSpinner(true)
+  
   issuesCardsContainer.innerHTML = ""
   const res = await fetch`https://phi-lab-server.vercel.app/api/v1/lab/issues`;
 
@@ -242,7 +258,7 @@ async function displayClosedCard() {
     }
   });
   issuesCount()
-  removeSpinner(true)
+ 
 
 }
 
@@ -271,7 +287,7 @@ async function searchCard(searchValue) {
       cardLoad(card)
     })
     
-    removeSpinner(true)
+     removeSpinner(true)
   }
   
 

@@ -32,7 +32,7 @@
   <body class="bg-[#F8FAFC]">
     <header>
       <nav class="bg-base-100 shadow-sm py-5">
-        <div class="flex flex-col md:flex-row justify-between mx-3">
+        <div class="flex flex-col md:flex-row jastify-certer md:justify-between mx-5 gap-3 md:gap-0">
           <div class="flex">
             <img
               src="./assets/github-logo.png"
@@ -42,8 +42,9 @@
 
             <p class="btn btn-ghost text-xl">GitHub Issues Tracker</p>
           </div>
-          <div class="flex gap-3">
+          <div class="flex gap-3 mx-auto md:mx-0">
             <input 
+              value=""
               id="search-input"
               type="text"
               placeholder="Search Issues"
@@ -53,20 +54,6 @@
                Search
             </button>
           </div>
-
-          <!--
-          <div class="flex gap-2">
-            <div class="dropdown dropdown-end">
-              <div
-                tabindex="0"
-                role="button"
-                class="btn btn-ghost btn-circle avatar"
-              >
-                <div class= "></div>
-              </div>
-            </div>
-          </div>
-          -->
         </div>
       </nav>
     </header>
@@ -99,27 +86,28 @@
             <span class="text-black">Closed</span>
           </li>
         </ul>
+        
       </section>
       <section class="bg-[#FBFBFB]">
-        <div class="flex justify-center items-center p-30 hidden">
-          <span id="spinner" class="loading loading-spinner text-neutral"></span>
+        <div id="spinner" class="flex justify-center items-center p-30 ">
+          <span  class="loading loading-spinner text-neutral"></span>
         </div>
         <div
           id="issues-cards-container"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6"
+          class="grid grid-cols-1  lg:grid-cols-3 gap-4 p-6"
         ></div>
       </section>
       <section>
         <!-- Open the modal using ID.showModal() method -->
         <button class="btn" onclick="showModal()"></button>
         <dialog id="card-one-modal" class="modal modal-bottom sm:modal-middle">
-          <div class="modal-box ">
-            <h3 id="tittle-details" class="mb-2">Fix broken image uploads</h3>
+          <div class="modal-box pt-8">
+            <h3 id="tittle-details" class="mb-2 text-[18px] font-semibold"></h3>
             <div class="flex gap-5">
-              <p class="bg-green-600 px-3 py-1 rounded-2xl w-25 text-center mb-4"><span id="status-details">open</span>ed</p>
+              <p class="bg-green-600 px-3 py-1 rounded-2xl w-25 text-center mb-4"><span id="status-details">open</span></p>
               <ul class="flex gap-7 list-disc">
-                <li id="" class="line-clamp-2 text-[16px] text-[#64748B] " >Opened  <span>by </span><span id="author-name"> Fahim Ahmed</span></li>
-                <li id="">22/02/2026</li>
+                <li id="" class="line-clamp-2 text-[16px] text-[#64748B] " ><span id="second-status-details">Opened</span>  <span>by </span><span id="author-name"> </span></li>
+                <li id="open-date" class="text-[16px] text-[#64748B]">22/02/2026</li>
               </ul>
             </div>
             <p id="description-details" class="line-clamp-2 text-[16px] text-[#64748B] mt-4 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, maxime.</p>
